@@ -98,11 +98,14 @@ function App() {
     let clickedBounding = clickedComponent.getBoundingClientRect();
     let referenceBouding = referenceComponent.getBoundingClientRect();
     let selectedRule = rule.find((e) => e.color === currentGivenColor);
+    console.log("ini clickedBounding", clickedBounding);
+    console.log("ini referenceBounding", referenceBouding);
     if (selectedRule?.rule === "vertical") {
       let isRight =
         clickedBounding.x === referenceBouding?.x &&
         clickedBounding.left === referenceBouding?.left &&
-        clickedBounding.right === referenceBouding?.right;
+        clickedBounding.right === referenceBouding?.right &&
+        clickedComponent.id !== referenceComponent.id;
       setAnswerList([
         ...answerList,
         {
@@ -110,13 +113,15 @@ function App() {
           interval: new Date().getTime() - timeAppeared.pop().getTime(),
         },
       ]);
+      console.log("vertical", isRight);
       RandomizeComponentId();
       return isRight;
     } else if (selectedRule?.rule === "horizontal") {
       let isRight =
         clickedBounding.y === referenceBouding?.y &&
         clickedBounding.top === referenceBouding?.top &&
-        clickedBounding.bottom === referenceBouding?.bottom;
+        clickedBounding.bottom === referenceBouding?.bottom &&
+        clickedComponent.id !== referenceComponent.id;
       setAnswerList([
         ...answerList,
         {
@@ -124,6 +129,7 @@ function App() {
           interval: new Date().getTime() - timeAppeared.pop().getTime(),
         },
       ]);
+      console.log("horizontal", isRight);
       RandomizeComponentId();
       return isRight;
     } else {
@@ -137,6 +143,7 @@ function App() {
           interval: new Date().getTime() - timeAppeared.pop().getTime(),
         },
       ]);
+      console.log("component", isRight);
       RandomizeComponentId();
       return isRight;
     }
