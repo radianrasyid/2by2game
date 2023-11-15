@@ -168,52 +168,54 @@ function App() {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center">
-      <div>
-        {rule.map((item, index) => {
-          switch (item.rule) {
-            case "horizontal":
-              return (
-                <div className="flex gap-2" key={index}>
-                  <div
-                    style={{
-                      backgroundColor: item.color,
-                    }}
-                    className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
-                  ></div>
-                  <span>
-                    Click the square that horizontally align with this color
-                  </span>
-                </div>
-              );
-            case "vertical":
-              return (
-                <div className="flex gap-2" key={index}>
-                  <div
-                    style={{
-                      backgroundColor: item.color,
-                    }}
-                    className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
-                  ></div>
-                  <span>
-                    Click the square that vertically align with this color
-                  </span>
-                </div>
-              );
-            case "component":
-              return (
-                <div className="flex gap-2" key={index}>
-                  <div
-                    style={{
-                      backgroundColor: item.color,
-                    }}
-                    className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
-                  ></div>
-                  <span>Click the colored square</span>
-                </div>
-              );
-          }
-        })}
-      </div>
+      {playedTime > 0 ? null : (
+        <div>
+          {rule.map((item, index) => {
+            switch (item.rule) {
+              case "horizontal":
+                return (
+                  <div className="flex gap-2" key={index}>
+                    <div
+                      style={{
+                        backgroundColor: item.color,
+                      }}
+                      className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
+                    ></div>
+                    <span>
+                      Click the square that horizontally align with this color
+                    </span>
+                  </div>
+                );
+              case "vertical":
+                return (
+                  <div className="flex gap-2" key={index}>
+                    <div
+                      style={{
+                        backgroundColor: item.color,
+                      }}
+                      className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
+                    ></div>
+                    <span>
+                      Click the square that vertically align with this color
+                    </span>
+                  </div>
+                );
+              case "component":
+                return (
+                  <div className="flex gap-2" key={index}>
+                    <div
+                      style={{
+                        backgroundColor: item.color,
+                      }}
+                      className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
+                    ></div>
+                    <span>Click the colored square</span>
+                  </div>
+                );
+            }
+          })}
+        </div>
+      )}
       {playedTime > 0 ? null : (
         <div className="flex gap-2">
           <input
@@ -255,7 +257,7 @@ function App() {
               });
             }}
             id="column-1"
-            className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
+            className="col-span-1 border min-w-[15rem] min-h-[15rem] cursor-pointer"
           ></div>
           <div
             onClick={(e) => {
@@ -268,7 +270,7 @@ function App() {
               });
             }}
             id="column-2"
-            className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
+            className="col-span-1 border min-w-[15rem] min-h-[15rem] cursor-pointer"
           ></div>
           <div
             onClick={(e) => {
@@ -281,7 +283,7 @@ function App() {
               });
             }}
             id="column-3"
-            className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
+            className="col-span-1 border min-w-[15rem] min-h-[15rem] cursor-pointer"
           ></div>
           <div
             onClick={(e) => {
@@ -295,7 +297,7 @@ function App() {
               });
             }}
             id="column-4"
-            className="col-span-1 border min-w-[2rem] min-h-[2rem] cursor-pointer"
+            className="col-span-1 border min-w-[15rem] min-h-[15rem] cursor-pointer"
           ></div>
         </div>
       ) : (
