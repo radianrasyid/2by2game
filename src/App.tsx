@@ -1,50 +1,54 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+enum Rule {
+  Horizontal = "horizontal",
+  Vertical = "vertical",
+  Component = "component",
+}
+
+interface MyObject {
+  color: string;
+  rule: Rule;
+}
+
 function App() {
   const [remainingTime, setRemainingTime] = useState<number>(3);
   const [coloredComponent, setColoredComponent] = useState<string>("");
   const [timeInputted, setTimeInputted] = useState<number>(0);
   const [playedTime, setPlayedTime] = useState<number>(0);
-  const [rule, setRule] = useState<{ color: string; rule: string }[]>([
+  const [rule, setRule] = useState<MyObject[]>([
     {
       color: "green",
-      rule: "horizontal",
+      rule: Rule.Horizontal,
     },
     {
       color: "red",
-      rule: "vertical",
+      rule: Rule.Vertical,
     },
     {
       color: "blue",
-      rule: "component",
+      rule: Rule.Component,
     },
   ]);
+  function randomizeRules(arr: MyObject[]): MyObject[] {
+    // Create a copy of the original array to avoid modifying the original
+    const newArray: MyObject[] = arr.map((obj) => ({ ...obj }));
 
-  function getRandomRule(existingRules: any) {
-    const possibleRules = ["horizontal", "vertical", "component"];
-    const availableRules = possibleRules.filter(
-      (rule) => !existingRules.includes(rule)
-    );
+    // Create an array of available rules
+    const availableRules = [Rule.Horizontal, Rule.Vertical, Rule.Component];
 
-    // Check if there are available rules
-    if (availableRules.length === 0) {
-      // If not, reset the existing rules and pick a random one
-      existingRules.length = 0;
-      return possibleRules[Math.floor(Math.random() * possibleRules.length)];
-    }
+    // Shuffle the array of available rules
+    availableRules.sort(() => Math.random() - 0.5);
 
-    return availableRules[Math.floor(Math.random() * availableRules.length)];
-  }
-
-  function updateArray(array: { color: string; rule: string }[]) {
-    const newArray = [...array];
-
-    for (let i = 0; i < newArray.length; i++) {
-      newArray[i].rule = getRandomRule(newArray.map((item) => item.rule));
-    }
+    // Assign shuffled rules to each object
+    newArray.forEach((obj) => {
+      obj.rule = availableRules.pop() || Rule.Horizontal; // Use a default rule if needed
+    });
 
     setRule(newArray);
+
+    return newArray;
   }
 
   const [timeAppeared, setTimeAppeared] = useState<any[]>([]);
@@ -230,7 +234,7 @@ function App() {
               setTimeAppeared([]);
             }}
             onMouseEnter={() => {
-              updateArray(rule);
+              randomizeRules(rule);
             }}
             disabled={!timeInputted ? true : false}
           >
