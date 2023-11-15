@@ -5,10 +5,7 @@ function App() {
   const [remainingTime, setRemainingTime] = useState<number>(3);
   const [coloredComponent, setColoredComponent] = useState<string>("");
   const [timeInputted, setTimeInputted] = useState<number>(0);
-  const [currentColor, setCurrentColor] = useState("");
   const [playedTime, setPlayedTime] = useState<number>(0);
-  const [trueAnswer, setTrueAnswer] = useState<number>(0);
-  const [wrongAnswer, setWrongAnswer] = useState<number>(0);
   const [rule, setRule] = useState<{ color: string; rule: string }[]>([
     {
       color: "green",
@@ -82,7 +79,6 @@ function App() {
     if (pickedColumn) {
       let randomColor = Math.floor(Math.random() * colors.length);
       let pickedColor = colors[randomColor];
-      setCurrentColor(pickedColor);
       pickedColumn.style.backgroundColor = pickedColor;
     }
   };
